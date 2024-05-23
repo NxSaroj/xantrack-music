@@ -7,16 +7,20 @@ module.exports = {
       {
         name: "amount",
         description: "The amount of volume to customize || 1, 2",
-        type: ApplicationCommandOptionType.Integer,
+        type: ApplicationCommandOptionType.Number,
         required: true,
       },
     ],
     dm_permission: false,
   },
-
+/**
+ * 
+ * @param {import('commandkit').SlashCommandProps} param0 
+ * @returns 
+ */
   run: async ({ interaction, client }) => {
     try {
-      const volumeAmount = interaction.options.getInteger("amount");
+      const volumeAmount = interaction.options.getNumber("amount");
       const voiceChannel = interaction.member.voice.channel;
       if (!voiceChannel) {
         const noVoiceChannel = new EmbedBuilder()

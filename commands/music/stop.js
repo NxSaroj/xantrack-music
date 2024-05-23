@@ -8,27 +8,27 @@ module.exports = {
   run: async ({ interaction }) => {
     const voiceChannel = interaction.member.voice.channel;
 
-    try {
-      if (!voiceChannel) {
-        const noVoiceChannel = new EmbedBuilder()
-          .setDescription(
-            `> <:xn_pink_wrong:1215934948075110441> Cutie please join a voice channel so i can songs for you 💕**`
-          )
-          .setColor("D100FF");
-        const response = await interaction.reply({
+    if (!voiceChannel) {
+      const noVoiceChannel = new EmbedBuilder()
+        .setDescription(
+          `> <:xn_pink_wrong:1215934948075110441> Cutie please join a voice channel so i can songs for you 💕**`
+        )
+        .setColor("D100FF");
+      const response = await interaction
+        .reply({
           embeds: [noVoiceChannel],
+        })
+        .catch((err) => {
+          return;
         });
-        setTimeout(async () => {
-          await response
-            .delete()
-            .catch((e) =>
-              console.error(`Error while deleting the message \n ${e}`)
-            );
-        }, 2000);
-        return;
-      }
-    } catch (e) {
-      return console.error(e)
+      setTimeout(async () => {
+        await response
+          .delete()
+          .catch((e) =>
+            console.error(`Error while deleting the message \n ${e}`)
+          );
+      }, 2000);
+      return;
     }
 
     try {

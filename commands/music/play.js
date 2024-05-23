@@ -18,16 +18,19 @@ module.exports = {
     const song = interaction.options.getString("song-name");
     const voiceChannel = interaction.member.voice.channel;
 
-  try {
     if (!voiceChannel) {
       const noVoiceChannel = new EmbedBuilder()
         .setDescription(
           `> <:xn_pink_wrong:1215934948075110441> Cutie please join a voice channel so i can songs for you 💕**`
         )
         .setColor("D100FF");
-      const response = await interaction.reply({
-        embeds: [noVoiceChannel],
-      });
+      const response = await interaction
+        .reply({
+          embeds: [noVoiceChannel],
+        })
+        .catch((err) => {
+          return;
+        });
       setTimeout(async () => {
         await response
           .delete()
@@ -35,18 +38,14 @@ module.exports = {
             console.error(`Error while deleting the message \n ${e}`)
           );
       }, 2000);
-      
     }
-  } catch (e) {
-     console.error(e)
-  }
 
-  const response = await interaction.reply(
-    `<a:xn_pink_loading:1215940417078693918> Searching the song`
-  )
+    const response = await interaction.reply(
+      `<a:xn_pink_loading:1215940417078693918> Finding the song...`
+    );
 
     try {
-      client.distube.play(voiceChannel, song, {
+      await client.distube.play(voiceChannel, song, {
         textChannel: interaction.channel,
         member: interaction.member,
       });

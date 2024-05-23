@@ -13,7 +13,7 @@ module.exports = {
         try {
             const clientPing = client.ws.ping
             interaction.editReply({
-                content: `**Here's my heartbeat \n HeartBeat <a:xn_pink_arrow:1215929366547005450> ${clientPing}ms \n RoundTrip <a:xn_pink_arrow:1215929366547005450> ${response.createdTimestamp - interaction.createdTimestamp},s**`
+                content: `**Here's my heartbeat \n HeartBeat <a:xn_pink_arrow:1215929366547005450> ${clientPing}ms \n RoundTrip <a:xn_pink_arrow:1215929366547005450> ${response.createdTimestamp - interaction.createdTimestamp}ms**`
             })
             return
         } catch (e) {
